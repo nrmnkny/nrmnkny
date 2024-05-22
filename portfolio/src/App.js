@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
-import ProjectDetail from './components/ProjectDetail'; 
+import ProjectDetail from './components/ProjectDetail';
 
 const App = () => {
   const [content, setContent] = useState('education');
@@ -17,6 +17,8 @@ const App = () => {
           location="Nairobi"
           email="nrmnkny@encreage.com"
           phone="(254) 705-532-531"
+          blogLink="https://blog.encreage.com"
+          twitterLink="https://twitter.com/nrmnkny"
         />
         <div className="flex flex-grow">
           <Sidebar setContent={setContent} />
