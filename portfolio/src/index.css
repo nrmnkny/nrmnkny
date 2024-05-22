@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=GFS+Neohellenic:ital,wght@0,400;0,700;1,400;1,700&family=Major+Mono+Display&family=Monsieur+La+Doulaise&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Syne:wght@400..800&display=swap');
+
+body {
+  @apply font-sans;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
