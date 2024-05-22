@@ -1,0 +1,9 @@
+{
+    "name": "root-config",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "cd svr && npm start",
+      "heroku-postbuild": "cd svr && npm install"
+    }
+  }
+  
