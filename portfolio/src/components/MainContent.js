@@ -15,7 +15,7 @@ const MainContent = ({ content }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/${content}`)
+    axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${content}`)
       .then(response => setData(response.data))
       .catch(error => console.error(`Error fetching ${content} data:`, error));
   }, [content]);
