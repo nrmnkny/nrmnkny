@@ -1,5 +1,5 @@
 import React from 'react';
-import profileImage from '../assets/DP.jpg';
+import profileImage from '../assets/profile.jpg';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBlog } from '@fortawesome/free-solid-svg-icons';
