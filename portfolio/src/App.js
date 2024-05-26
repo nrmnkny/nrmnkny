@@ -15,9 +15,9 @@ const App = () => {
           name="Norman Kenya"
           title="Full Stack Developer"
           location="Nairobi"
-          email="nrmnkny@encreage.com"
+          email="normankenya0@gmail.com"
           phone="(254) 705-532-531"
-          blogLink="https://blog.encreage.com"
+          blogLink="https://blog.nrmnkny.com"
           twitterLink="https://twitter.com/nrmnkny"
         />
         <div className="flex flex-grow">
