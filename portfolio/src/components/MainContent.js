@@ -13,15 +13,48 @@ const images = {
 
 const MainContent = ({ content }) => {
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${content}`)
-      .then(response => setData(response.data))
-      .catch(error => console.error(`Error fetching ${content} data:`, error));
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${content}`);
+        setData(response.data);
+      } catch (error) {
+        console.error(`Error fetching ${content} data:`, error);
+        setError(error);
+      }
+    };
+
+    fetchData();
   }, [content]);
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
 
   return (
     <main className="flex-grow p-4 md:p-8 bg-gray-100 text-black overflow-auto">
+      {content === 'workexperience' && (
+        <div>
+          <h2 className="text-3xl font-bold mb-8">Work Experience</h2>
+          {data.map((work, index) => (
+            <div key={index} className="mb-8 p-6 bg-white text-black rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 className="text-2xl font-semibold">{work.title}</h3>
+              <p className="text-lg">{work.description?.split('. ')[0]}</p>
+              <p className="text-sm">{`${new Date(work.start_date).toLocaleDateString()} - ${work.end_date ? new Date(work.end_date).toLocaleDateString() : 'Present'}`}</p>
+              {work.description && work.description.includes('. ') && (
+                <div className="mt-4">
+                  <h4 className="font-semibold">Details:</h4>
+                  <p className="text-sm mt-2">
+                    {work.description.split('. ').slice(1).join('. ')}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
       {content === 'education' && (
         <div>
           <h2 className="text-3xl font-bold mb-8">Education</h2>
@@ -38,26 +71,6 @@ const MainContent = ({ content }) => {
                       <li key={i}>{activity}</li>
                     ))}
                   </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-      {content === 'workexperience' && (
-        <div>
-          <h2 className="text-3xl font-bold mb-8">Work Experience</h2>
-          {data.map((work, index) => (
-            <div key={index} className="mb-8 p-6 bg-white text-black rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-semibold">{work.title}</h3>
-              <p className="text-lg">{work.description?.split('. ')[0]}</p>
-              <p className="text-sm">{`${new Date(work.start_date).toLocaleDateString()} - ${work.end_date ? new Date(work.end_date).toLocaleDateString() : 'Present'}`}</p>
-              {work.description && work.description.includes('. ') && (
-                <div className="mt-4">
-                  <h4 className="font-semibold">Details:</h4>
-                  <p className="text-sm mt-2">
-                    {work.description.split('. ').slice(1).join('. ')}
-                  </p>
                 </div>
               )}
             </div>

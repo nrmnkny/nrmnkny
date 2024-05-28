@@ -2,8 +2,10 @@
     "name": "root-config",
     "version": "1.0.0",
     "scripts": {
-      "start": "cd svr && npm start",
-      "heroku-postbuild": "cd svr && npm install"
+        "start": "cd svr && npm start",
+        "heroku-postbuild": "cd svr && npm install"
+    },
+    "dependencies": {
+        "mysql2": "^3.9.8"
     }
-  }
-  
+}
