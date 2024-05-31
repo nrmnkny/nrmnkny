@@ -8,6 +8,11 @@ import BlogList from './components/BlogList';
 import BlogPostForm from './components/BlogPostForm';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import AdminDashboard from './components/AdminDashboard';
+import PortfolioForm from './components/PortfolioForm';
+import AdminBlogList from './components/AdminBlogList';
+import AdminPortfolioList from './components/AdminPortfolioList';
+import BlogDetail from './components/BlogDetail';
 
 const App = () => {
   const [content, setContent] = useState('workexperience');
@@ -41,10 +46,16 @@ const App = () => {
             <Route path="/researchinterests" element={<MainContent content="researchinterests" />} />
             <Route path="/project/:title" element={<ProjectDetail />} />
             <Route path="/blog" element={<BlogList />} />
+            <Route path="/blog/:id" element={<BlogDetail />} /> 
+            <Route path="/admin/blog" element={token ? <AdminBlogList /> : <Navigate to="/login" />} />
             <Route path="/admin/blog/new" element={token ? <BlogPostForm token={token} /> : <Navigate to="/login" />} />
             <Route path="/admin/blog/edit/:id" element={token ? <BlogPostForm token={token} isEdit /> : <Navigate to="/login" />} />
+            <Route path="/admin/portfolio" element={token ? <AdminPortfolioList /> : <Navigate to="/login" />} />
             <Route path="/login" element={<LoginForm setToken={setTokenHandler} />} />
             <Route path="/register" element={<RegisterForm setToken={setTokenHandler} />} />
+            <Route path="/admin" element={token ? <AdminDashboard /> : <Navigate to="/login" />} />
+            <Route path="/admin/portfolio/new" element={token ? <PortfolioForm token={token} /> : <Navigate to="/login" />} />
+            <Route path="/admin/portfolio/edit/:id" element={token ? <PortfolioForm token={token} isEdit /> : <Navigate to="/login" />} />
           </Routes>
         </div>
       </div>

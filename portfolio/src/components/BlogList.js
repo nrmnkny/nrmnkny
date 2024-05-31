@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -36,9 +37,11 @@ const BlogList = () => {
           </div>
         ))}
       </div>
-      <div className="mt-4">
-        <Link to="/admin/blog/new" className="text-white bg-yellow-500 px-4 py-2 rounded-md">Create New Post</Link>
-      </div>
+      {token && (
+        <div className="mt-4">
+          <Link to="/admin/blog/new" className="text-white bg-yellow-500 px-4 py-2 rounded-md">Create New Post</Link>
+        </div>
+      )}
     </div>
   );
 };
