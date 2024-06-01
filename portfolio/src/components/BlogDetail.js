@@ -29,7 +29,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="p-8 bg-white shadow-md rounded-lg max-w-3xl mx-auto mt-8">
+    <div className="p-8 bg-white rounded-lg max-w-3xl mx-auto mt-8">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-600 mb-4">By {post.author} on {new Date(post.created_at).toLocaleDateString()}</p>
       <div className="text-lg leading-relaxed">

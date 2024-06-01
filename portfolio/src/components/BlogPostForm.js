@@ -34,20 +34,19 @@ const BlogPostForm = ({ token, isEdit }) => {
     const postData = { title, content, author };
 
     try {
-      console.log('Submitting post data:', postData); // Log post data
+      console.log('Submitting post data:', postData);
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       if (isEdit) {
-        await axios.put(`http://localhost:5000/api/blog/${id}`, postData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.put(`http://localhost:5000/api/blog/${id}`, postData, config);
       } else {
-        await axios.post('http://localhost:5000/api/blog', postData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post('http://localhost:5000/api/blog', postData, config);
       }
       navigate('/blog');
     } catch (error) {
-      console.error('Error submitting post:', error); // Log error
-      console.log('Response:', error.response); // Log response from server
+      console.error('Error submitting post:', error);
+      console.log('Response:', error.response);
       setError(error);
     }
   };

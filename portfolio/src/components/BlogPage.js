@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const BlogList = () => {
+const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const token = localStorage.getItem('token');
@@ -39,13 +39,13 @@ const BlogList = () => {
           </div>
         ))}
       </div>
-      {token && (
+      {/* {token && (
         <div className="mt-6">
           <Link to="/admin/blog/new" className="text-white bg-yellow-500 px-4 py-2 rounded-md">Create New Post</Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default BlogList;
+export default BlogPage;
