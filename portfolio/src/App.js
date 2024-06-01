@@ -36,7 +36,7 @@ const App = () => {
                 location="Nairobi"
                 email="normankenya0@gmail.com"
                 phone="(254) 705-532-531"
-                blogLink="https://blog.nrmnkny.vercel.app"
+                blogLink="https://nrmnkny.vercel.app/blog"
                 twitterLink="https://twitter.com/nrmnkny"
               />
               <div className="flex flex-grow">
