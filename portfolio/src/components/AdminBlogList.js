@@ -11,7 +11,7 @@ const AdminBlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/blog');
+        const response = await axios.get('https://nrmnkny-74d777c56ce9.herokuapp.com/api/blog');
         setPosts(response.data);
       } catch (error) {
         setError(error);
@@ -37,7 +37,7 @@ const AdminBlogList = () => {
         },
       };
 
-      await axios.delete(`http://localhost:5000/api/blog/${id}`, config);
+      await axios.delete(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/blog/${id}`, config);
 
       console.log(`Post with ID: ${id} deleted successfully`);
 
@@ -45,7 +45,7 @@ const AdminBlogList = () => {
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.message === 'Invalid token.') {
         try {
-          const refreshResponse = await axios.post('http://localhost:5000/api/auth/refresh-token', {}, {
+          const refreshResponse = await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/auth/refresh-token', {}, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

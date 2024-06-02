@@ -39,11 +39,11 @@ const PortfolioForm = ({ token, isEdit }) => {
 
     try {
       if (isEdit) {
-        await axios.put(`http://localhost:5000/api/portfolio/${id}`, portfolioData, {
+        await axios.put(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio/${id}`, portfolioData, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
       } else {
-        await axios.post('http://localhost:5000/api/portfolio', portfolioData, {
+        await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio', portfolioData, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
       }

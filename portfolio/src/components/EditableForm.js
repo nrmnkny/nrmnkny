@@ -12,7 +12,7 @@ const EditableForm = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/${category}/${id}`, {
+                const response = await axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${category}/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -36,7 +36,7 @@ const EditableForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:5000/api/${category}/${id}`, item, {
+            await axios.put(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${category}/${id}`, item, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'

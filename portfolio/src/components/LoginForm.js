@@ -12,7 +12,7 @@ const LoginForm = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/auth/login', { email, password });
       setToken(response.data.token);
       navigate('/admin'); // Redirect to admin dashboard
     } catch (err) {
