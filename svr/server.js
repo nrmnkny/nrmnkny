@@ -7,7 +7,11 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://nrmnkny.vercel.app', 'https://nrmnkny-74d777c56ce9.herokuapp.com', 'http://localhost:3000'], // Add your frontend domains
+  credentials: true,
+}));
+
 app.use(express.json());
 
 app.use('/api/portfolio', dataRoutes);
