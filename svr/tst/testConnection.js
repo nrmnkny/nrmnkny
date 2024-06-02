@@ -1,4 +1,4 @@
-const { getDbConnection } = require('./db');
+const { getDbConnection } = require('../config/db');
 
 const testConnection = async () => {
     try {
