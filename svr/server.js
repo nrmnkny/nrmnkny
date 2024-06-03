@@ -8,7 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ['localhost:3000/api'],
+  origin: ['http://localhost:3000', 'https://nrmnkny.vercel.app'],
   credentials: true,
 }));
 
