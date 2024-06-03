@@ -6,9 +6,11 @@ const DataController = {
     try {
       const pool = await getDbConnection();
       const result = await pool.request().query("SELECT * FROM portfolio_data WHERE category='education'");
+      console.log('Query executed successfully', result);
       res.json(result.recordset);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      console.error('Error fetching work experience:', err.message);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   },
   getAllWorkExperience: async (req, res) => {
