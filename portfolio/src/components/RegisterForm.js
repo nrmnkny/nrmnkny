@@ -9,7 +9,7 @@ const RegisterForm = ({ setToken }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/auth/register', { username, password });
+            const response = await axios.post('http://localhost:5000/api/auth/register', { username, password });
             setToken(response.data.token);
         } catch (err) {
             console.error('Registration error:', err);

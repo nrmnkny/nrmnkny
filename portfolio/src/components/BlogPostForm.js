@@ -39,9 +39,9 @@ const BlogPostForm = ({ token, isEdit }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       if (isEdit) {
-        await axios.put(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/blog/${id}`, postData, config);
+        await axios.put(`http://localhost:5000/api/blog/${id}`, postData, config);
       } else {
-        await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/blog', postData, config);
+        await axios.post('http://localhost:5000/api/blog', postData, config);
       }
       navigate('/blog');
     } catch (error) {

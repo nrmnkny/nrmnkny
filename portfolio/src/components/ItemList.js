@@ -11,7 +11,7 @@ const ItemList = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${category}`, {
+                const response = await axios.get(`http://localhost:5000/api/${category}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }

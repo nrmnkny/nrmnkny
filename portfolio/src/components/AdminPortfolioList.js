@@ -9,7 +9,7 @@ const AdminPortfolioList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio');
+        const response = await axios.get('http://localhost:5000/api/portfolio');
         setItems(response.data);
       } catch (error) {
         setError(error);

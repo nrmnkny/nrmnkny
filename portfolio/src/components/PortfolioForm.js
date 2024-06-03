@@ -16,13 +16,13 @@ const PortfolioForm = ({ token, isEdit }) => {
     if (isEdit && id) {
       const fetchPortfolioItem = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/portfolio/${id}`);
+          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`);
           const { title, description, category, start_date, end_date } = response.data;
           setTitle(title);
           setDescription(description);
           setCategory(category);
-          setStartDate(start_date);
-          setEndDate(end_date);
+          setStartDate(start_date ? start_date.split('T')[0] : '');
+          setEndDate(end_date ? end_date.split('T')[0] : '');
         } catch (error) {
           setError(error);
         }
@@ -39,12 +39,12 @@ const PortfolioForm = ({ token, isEdit }) => {
 
     try {
       if (isEdit) {
-        await axios.put(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio/${id}`, portfolioData, {
-          headers: { 'Authorization': `Bearer ${token}` },
+        await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, portfolioData, {
+          headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post('https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio', portfolioData, {
-          headers: { 'Authorization': `Bearer ${token}` },
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio`, portfolioData, {
+          headers: { Authorization: `Bearer ${token}` },
         });
       }
       navigate('/admin/portfolio');

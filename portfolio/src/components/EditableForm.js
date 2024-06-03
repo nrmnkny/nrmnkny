@@ -12,7 +12,7 @@ const EditableForm = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/${category}/${id}`, {
+                const response = await axios.get(`http://http://localhost:5000/api/${category}/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }

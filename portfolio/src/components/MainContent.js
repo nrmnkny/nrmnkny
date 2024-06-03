@@ -18,7 +18,7 @@ const MainContent = ({ content }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://nrmnkny-74d777c56ce9.herokuapp.com/api/portfolio/${content}`);
+        const response = await axios.get(`http://localhost:5000/api/portfolio/${content}`);
         setData(response.data);
       } catch (error) {
         console.error(`Error fetching ${content} data:`, error);
