@@ -3,11 +3,11 @@ const sql = require('mssql');
 const config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    server: process.env.DB_HOST,
+    server: process.env.DB_HOST, // Amazon RDS endpoint
     database: process.env.DB_DATABASE,
     options: {
-        encrypt: true,
-        trustServerCertificate: true,
+        encrypt: true, // Enable encryption
+        trustServerCertificate: true, // Trust the server certificate
     },
 };
 
