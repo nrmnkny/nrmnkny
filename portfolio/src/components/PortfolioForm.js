@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import api from '../utils/api';
 
 const PortfolioForm = ({ token, isEdit }) => {
   const navigate = useNavigate();
@@ -16,13 +16,17 @@ const PortfolioForm = ({ token, isEdit }) => {
     if (isEdit && id) {
       const fetchPortfolioItem = async () => {
         try {
-          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`);
+          const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
           const { title, description, category, start_date, end_date } = response.data;
           setTitle(title);
           setDescription(description);
           setCategory(category);
-          setStartDate(start_date ? start_date.split('T')[0] : '');
-          setEndDate(end_date ? end_date.split('T')[0] : '');
+          if (category !== 'skills') {
+            setStartDate(start_date ? start_date.split('T')[0] : '');
+            setEndDate(end_date ? end_date.split('T')[0] : '');
+          }
         } catch (error) {
           setError(error);
         }
@@ -30,20 +34,25 @@ const PortfolioForm = ({ token, isEdit }) => {
 
       fetchPortfolioItem();
     }
-  }, [isEdit, id]);
+  }, [isEdit, id, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const portfolioData = { title, description, category, start_date: startDate, end_date: endDate };
 
+    if (category === 'skills') {
+      delete portfolioData.start_date;
+      delete portfolioData.end_date;
+    }
+
     try {
       if (isEdit) {
-        await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, portfolioData, {
+        await api.put(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, portfolioData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio`, portfolioData, {
+        await api.post('${process.env.REACT_APP_API_BASE_URL}/api/portfolio', portfolioData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -90,24 +99,28 @@ const PortfolioForm = ({ token, isEdit }) => {
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Start Date</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">End Date</label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-          />
-        </div>
+        {category !== 'skills' && (
+          <>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Start Date</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">End Date</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+              />
+            </div>
+          </>
+        )}
         <div className="flex justify-end">
           <button
             type="submit"

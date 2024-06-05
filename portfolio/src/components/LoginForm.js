@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 
 const LoginForm = ({ setToken }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -12,11 +12,11 @@ const LoginForm = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, { username, password });
       setToken(response.data.token);
       navigate('/admin'); // Redirect to admin dashboard
     } catch (err) {
-      setError('Invalid email or password');
+      setError('Invalid username or password');
     }
   };
 
@@ -26,11 +26,11 @@ const LoginForm = ({ setToken }) => {
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 mb-2">Email:</label>
+            <label className="block text-gray-700 mb-2">Username:</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />

@@ -4,31 +4,30 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.get('/education', DataController.getAllEducation);
-router.get('/workexperience', DataController.getAllWorkExperience);
-router.get('/skills', DataController.getAllSkills);
-router.get('/projects', DataController.getAllProjects);
-router.get('/researchinterests', DataController.getAllResearchInterests);
+// General routes
+router.get('/', DataController.getAllItems);
+router.get('/:id', DataController.getItemById);
+router.post('/', authMiddleware, DataController.createItem);
+router.put('/:id', authMiddleware, DataController.updateItem);
+router.delete('/:id', authMiddleware, DataController.deleteItem);
 
-// Protected routes for managing portfolio data
-router.post('/education', authMiddleware, DataController.createEducation);
-router.put('/education/:id', authMiddleware, DataController.updateEducation);
-router.delete('/education/:id', authMiddleware, DataController.deleteEducation);
-
-router.post('/workexperience', authMiddleware, DataController.createWorkExperience);
-router.put('/workexperience/:id', authMiddleware, DataController.updateWorkExperience);
-router.delete('/workexperience/:id', authMiddleware, DataController.deleteWorkExperience);
-
-router.post('/skills', authMiddleware, DataController.createSkills);
-router.put('/skills/:id', authMiddleware, DataController.updateSkills);
-router.delete('/skills/:id', authMiddleware, DataController.deleteSkills);
-
-router.post('/projects', authMiddleware, DataController.createProjects);
-router.put('/projects/:id', authMiddleware, DataController.updateProjects);
-router.delete('/projects/:id', authMiddleware, DataController.deleteProjects);
-
-router.post('/researchinterests', authMiddleware, DataController.createResearchInterests);
-router.put('/researchinterests/:id', authMiddleware, DataController.updateResearchInterests);
-router.delete('/researchinterests/:id', authMiddleware, DataController.deleteResearchInterests);
+// Category-based routes
+router.get('/category/:content', (req, res) => {
+  const { content } = req.params;
+  switch (content) {
+    case 'education':
+      return DataController.getAllEducation(req, res);
+    case 'workexperience':
+      return DataController.getAllWorkExperience(req, res);
+    case 'skills':
+      return DataController.getAllSkills(req, res);
+    case 'projects':
+      return DataController.getAllProjects(req, res);
+    case 'researchinterests':
+      return DataController.getAllResearchInterests(req, res);
+    default:
+      return res.status(404).json({ error: 'Not Found' });
+  }
+});
 
 module.exports = router;

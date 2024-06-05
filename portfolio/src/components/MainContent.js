@@ -18,7 +18,7 @@ const MainContent = ({ content }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/portfolio/${content}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/category/${content}`);
         setData(response.data);
       } catch (error) {
         console.error(`Error fetching ${content} data:`, error);

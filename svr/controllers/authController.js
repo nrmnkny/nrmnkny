@@ -1,17 +1,18 @@
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const router = express.Router();
-
-// User details (for demonstration purposes)
+// User details 
 const user = {
   username: 'admin',
   password: '$2a$10$K5b2wMB7ElF5HorKDqu73eQm4ZkWY5XVwsEMtifcxilQC8EYBtNmi' 
 };
 
-router.post('/login', async (req, res) => {
+// Login method
+const login = async (req, res) => {
   const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required.' });
+  }
   if (username !== user.username) {
     return res.status(400).json({ message: 'Invalid username or password.' });
   }
@@ -21,6 +22,26 @@ router.post('/login', async (req, res) => {
   }
   const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
   res.json({ token });
-});
+};
 
-module.exports = router;
+// Renew token method
+const renewToken = (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(400).json({ message: 'No token provided' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+
+    const newToken = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token: newToken });
+  });
+};
+
+module.exports = {
+  login,
+  renewToken,
+};

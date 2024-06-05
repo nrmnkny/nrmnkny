@@ -14,7 +14,7 @@ const BlogPostForm = ({ token, isEdit }) => {
     if (isEdit && id) {
       const fetchPost = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/blog/${id}`);
+          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/blog/${id}`);
           const { title, content, author } = response.data;
           setTitle(title);
           setContent(content);
@@ -39,9 +39,9 @@ const BlogPostForm = ({ token, isEdit }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       if (isEdit) {
-        await axios.put(`http://localhost:5000/api/blog/${id}`, postData, config);
+        await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/blog/${id}`, postData, config);
       } else {
-        await axios.post('http://localhost:5000/api/blog', postData, config);
+        await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/blog', postData, config);
       }
       navigate('/blog');
     } catch (error) {

@@ -13,6 +13,7 @@ import AdminDashboard from './components/AdminDashboard';
 import PortfolioForm from './components/PortfolioForm';
 import AdminBlogList from './components/AdminBlogList';
 import AdminPortfolioList from './components/AdminPortfolioList';
+import DeletePortfolioItem from './components/DeletePortfolioItem';
 
 const App = () => {
   const [content, setContent] = useState('workexperience');
@@ -61,6 +62,7 @@ const App = () => {
         <Route path="/admin/portfolio" element={token ? <AdminPortfolioList /> : <Navigate to="/login" />} />
         <Route path="/admin/portfolio/new" element={token ? <PortfolioForm token={token} /> : <Navigate to="/login" />} />
         <Route path="/admin/portfolio/edit/:id" element={token ? <PortfolioForm token={token} isEdit /> : <Navigate to="/login" />} />
+        <Route path="/admin/portfolio/delete/:id" element={token ? <DeletePortfolioItem /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );

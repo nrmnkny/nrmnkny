@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import api from '../utils/api';
 
 const AdminPortfolioList = () => {
   const [items, setItems] = useState([]);
@@ -9,7 +9,9 @@ const AdminPortfolioList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/portfolio');
+        const response = await api.get('${process.env.REACT_APP_API_BASE_URL}/api/portfolio', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
         setItems(response.data);
       } catch (error) {
         setError(error);
