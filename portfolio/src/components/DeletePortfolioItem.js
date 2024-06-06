@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios';
 
 const DeletePortfolioItem = () => {
   const { id } = useParams();
@@ -9,7 +9,7 @@ const DeletePortfolioItem = () => {
   useEffect(() => {
     const deleteItem = async () => {
       try {
-        await api.delete(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/item/${id}`, {
+        await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         navigate('/admin/portfolio');

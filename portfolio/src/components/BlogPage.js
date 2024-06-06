@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,11 +38,6 @@ const BlogPage = () => {
           </div>
         ))}
       </div>
-      {/* {token && (
-        <div className="mt-6">
-          <Link to="/admin/blog/new" className="text-white bg-yellow-500 px-4 py-2 rounded-md">Create New Post</Link>
-        </div>
-      )} */}
     </div>
   );
 };

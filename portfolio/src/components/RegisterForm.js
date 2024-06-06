@@ -9,7 +9,7 @@ const RegisterForm = ({ setToken }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/auth/register', { username, password });
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/register`, { username, password });
             setToken(response.data.token);
         } catch (err) {
             console.error('Registration error:', err);

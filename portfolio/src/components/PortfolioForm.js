@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios';
 
 const PortfolioForm = ({ token, isEdit }) => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const PortfolioForm = ({ token, isEdit }) => {
     if (isEdit && id) {
       const fetchPortfolioItem = async () => {
         try {
-          const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, {
+          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           const { title, description, category, start_date, end_date } = response.data;
@@ -48,11 +48,11 @@ const PortfolioForm = ({ token, isEdit }) => {
 
     try {
       if (isEdit) {
-        await api.put(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, portfolioData, {
+        await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio/${id}`, portfolioData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await api.post('${process.env.REACT_APP_API_BASE_URL}/api/portfolio', portfolioData, {
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/portfolio`, portfolioData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }

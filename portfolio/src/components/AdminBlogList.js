@@ -11,7 +11,7 @@ const AdminBlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/blog');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/blog`);
         setPosts(response.data);
       } catch (error) {
         setError(error);
@@ -40,7 +40,7 @@ const AdminBlogList = () => {
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.message === 'Invalid token.') {
         try {
-          const refreshResponse = await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/auth/refresh-token', {}, {
+          const refreshResponse = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/refresh-token`, {}, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

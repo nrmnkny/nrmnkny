@@ -41,7 +41,7 @@ const BlogPostForm = ({ token, isEdit }) => {
       if (isEdit) {
         await axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/blog/${id}`, postData, config);
       } else {
-        await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/blog', postData, config);
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/blog`, postData, config);
       }
       navigate('/blog');
     } catch (error) {
