@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const dataRoutes = require('./routes/dataRoutes');
@@ -7,11 +6,8 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-// Get the allowed origin from the environment variable
-const allowedOrigin = process.env.ALLOWED_ORIGIN;
-
 app.use(cors({
-  origin: allowedOrigin,
+  origin: ['https://nrmnkny.vercel.app', 'https://nrmnkny-r6fc6b59h-quirkscodes-projects.vercel.app'],
   credentials: true,
 }));
 
