@@ -7,8 +7,11 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+// Get the allowed origin from the environment variable
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+
 app.use(cors({
-  origin:  'https://nrmnkny.vercel.app',
+  origin: allowedOrigin,
   credentials: true,
 }));
 
