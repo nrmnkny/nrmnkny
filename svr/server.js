@@ -7,12 +7,14 @@ const { checkAuth } = require('./middlewares/authMiddleware');
 
 const app = express();
 
-app.use(cors({
+const corsOptions = {
   origin: ['https://nrmnkny.vercel.app', 'https://nrmnkny-r6fc6b59h-quirkscodes-projects.vercel.app'],
-  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

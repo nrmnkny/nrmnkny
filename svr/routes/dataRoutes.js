@@ -13,6 +13,7 @@ router.delete('/:id', authMiddleware, DataController.deleteItem);
 
 // Category-based routes
 router.get('/category/:content', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://nrmnkny.vercel.app'); // Set header for debugging
   const { content } = req.params;
   switch (content) {
     case 'education':
