@@ -3,7 +3,7 @@ const cors = require('cors');
 const dataRoutes = require('./routes/dataRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const authRoutes = require('./routes/authRoutes');
-const { checkAuth } = require('./middlewares/authMiddleware');
+const authenticateToken = require('./middlewares/authMiddleware');
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api/portfolio', dataRoutes);
-app.use('/api/blog', checkAuth, blogRoutes); 
+app.use('/api/blog', authenticateToken, blogRoutes); 
 app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
